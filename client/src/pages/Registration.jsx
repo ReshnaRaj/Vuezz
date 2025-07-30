@@ -63,32 +63,32 @@ const Registration = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "First name is required";
-    if (!formData.lastName) newErrors.lastName = "Last name is required";
-    if (!formData.country) newErrors.country = "Country is required";
-    if (!formData.region) newErrors.region = "Region is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.confirmEmail)
+    if (!formData.firstName.trim()) newErrors.firstName = "First name is required";
+    if (!formData.lastName.trim()) newErrors.lastName = "Last name is required";
+    if (!formData.country.trim()) newErrors.country = "Country is required";
+    if (!formData.region.trim()) newErrors.region = "Region is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.confirmEmail.trim())
       newErrors.confirmEmail = "Confirm Email is required";
     if (
-      formData.email &&
-      formData.confirmEmail &&
-      formData.email !== formData.confirmEmail
+      formData.email.trim() &&
+      formData.confirmEmail.trim() &&
+      formData.email.trim() !== formData.confirmEmail.trim()
     )
       newErrors.confirmEmail = "Emails do not match";
-    if (!formData.nationality)
-      newErrors.nationality = "Nationality is required";
-    if (!formData.mobileNumber)
+    if (!formData.nationality.trim())
+      newErrors.nationality= "Nationality is required";
+    if (!formData.mobileNumber.trim())
       newErrors.mobileNumber = "Mobile Number is required";
 //     else if (!/^\d{10}$/.test(formData.mobileNumber)) {
 //   newErrors.mobileNumber = "Mobile Number must be exactly 10 digits";
 // }
-    if (!formData.companyName)
+    if (!formData.companyName.trim())
       newErrors.companyName = "Company Name is required";
-    if (!formData.jobTitle) newErrors.jobTitle = "Job Title is required";
-    if (!formData.companyType)
+    if (!formData.jobTitle.trim()) newErrors.jobTitle = "Job Title is required";
+    if (!formData.companyType.trim())
       newErrors.companyType = "Company Type is required";
-    if (!formData.industry) newErrors.industry = "Industry is required";
+    if (!formData.industry.trim()) newErrors.industry = "Industry is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

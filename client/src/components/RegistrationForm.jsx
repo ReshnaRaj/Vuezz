@@ -147,7 +147,7 @@ const RegistrationForm = ({ formData, errors, handleChange }) => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="+91">+91</SelectItem>
-              <SelectItem value="+971">+971</SelectItem>
+              {/* <SelectItem value="+971">+971</SelectItem> */}
             </SelectContent>
           </Select>
           <Input
