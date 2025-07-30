@@ -10,13 +10,14 @@ import card4 from "@/assets/card4.jpg";
 import card5 from "@/assets/card5.jpg";
 import card6 from "@/assets/card6.jpg";
 import { Link, useNavigate } from "react-router-dom";
-
+import TicketModal from "@/components/ui/TicketModal";
 const tickets = [
   {
     title: "GITEX NIGERIA STANDARD PASS",
     badge: null,
     details: "VIEW DETAILS →",
-    description: "Grants access to all general exhibitions and free conference tracks for 3 days.",
+    description:
+      "Grants access to all general exhibitions and free conference tracks for 3 days.",
     features: [
       "3-Day Exhibition Access",
       "Networking Lounges",
@@ -32,7 +33,8 @@ const tickets = [
     title: "GITEX NIGERIA BUSINESS PASS",
     badge: null,
     details: "VIEW DETAILS →",
-    description: "Ideal for business professionals seeking networking and deeper insights.",
+    description:
+      "Ideal for business professionals seeking networking and deeper insights.",
     features: [
       "All from Standard Pass",
       "Access to VIP Lounge",
@@ -48,7 +50,8 @@ const tickets = [
     title: "GITEX NIGERIA VIP PASS",
     badge: "EXCLUSIVE",
     details: "VIEW DETAILS →",
-    description: "All-access VIP ticket for premium experiences, workshops, and more.",
+    description:
+      "All-access VIP ticket for premium experiences, workshops, and more.",
     features: [
       "All from Business Pass",
       "Private Networking Events",
@@ -64,7 +67,8 @@ const tickets = [
     title: "GITEX NIGERIA STUDENT PASS",
     badge: "BESTSELLER",
     details: "VIEW DETAILS →",
-    description: "Free access for students to learn and explore tech industry opportunities.",
+    description:
+      "Free access for students to learn and explore tech industry opportunities.",
     features: [
       "3-Day Exhibition Access",
       "Student Workshops",
@@ -79,7 +83,8 @@ const tickets = [
     title: "GITEX NIGERIA MEDIA PASS",
     badge: null,
     details: "VIEW DETAILS →",
-    description: "For journalists, bloggers, and media professionals covering the event.",
+    description:
+      "For journalists, bloggers, and media professionals covering the event.",
     features: [
       "Press Room Access",
       "Interview Zone",
@@ -94,7 +99,8 @@ const tickets = [
     title: "GITEX NIGERIA EXHIBITOR PASS",
     badge: null,
     details: "VIEW DETAILS →",
-    description: "Access tailored for event exhibitors, including booth setup and networking.",
+    description:
+      "Access tailored for event exhibitors, including booth setup and networking.",
     features: [
       "Exhibitor Zone Access",
       "Booth Setup Support",
@@ -108,12 +114,10 @@ const tickets = [
   },
 ];
 
-
 const TicketCardSkeleton = () => (
   <div className="rounded-xl bg-gray-100 animate-pulse h-[350px] w-full"></div>
 );
 
- 
 const TicketCard = ({
   ticket,
   index,
@@ -149,7 +153,9 @@ const TicketCard = ({
           )}
         </div>
         <button
-          className={`text-sm font-bold cursor-pointer mt-1 ${ticket.badge ? "ml-8" : ""}`}
+          className={`text-sm font-bold cursor-pointer mt-1 ${
+            ticket.badge ? "ml-8" : ""
+          }`}
           style={{ color: "#E6FF00" }}
           onClick={() => onViewDetails(ticket)}
         >
@@ -281,6 +287,16 @@ const Ticket = () => {
   //   0
   // );
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = (ticket) => {
+    setSelectedTicket(ticket);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedTicket(null);
+  };
   return (
     <>
       <Header step={4} />
@@ -298,35 +314,13 @@ const Ticket = () => {
                   onIncrement={() => handleQuantityChange(i, "inc")}
                   onDecrement={() => handleQuantityChange(i, "dec")}
                   navigate={navigate}
-                  onViewDetails={(ticketData) => setSelectedTicket(ticketData)}
+                  onViewDetails={handleOpenModal}
                 />
               ))}
         </div>
       </div>
-      {selectedTicket && (
-        <div className="fixed inset-0 z-50 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white rounded-xl p-6 max-w-lg w-full relative">
-            <button
-              onClick={() => setSelectedTicket(null)}
-              className="absolute top-2 right-2 text-gray-600 text-xl"
-            >
-              ×
-            </button>
-
-            <h2 className="text-xl font-bold mb-2">{selectedTicket.title}</h2>
-            <p className="text-sm mb-4">{selectedTicket.description}</p>
-
-            <ul className="text-sm list-disc list-inside space-y-1 mb-4">
-              {selectedTicket.features.map((f, i) => (
-                <li key={i}>{f}</li>
-              ))}
-            </ul>
-
-            <div className="text-right font-semibold text-green-700">
-              {selectedTicket.price}
-            </div>
-          </div>
-        </div>
+      {isModalOpen && selectedTicket && (
+        <TicketModal ticket={selectedTicket} onClose={handleCloseModal} />
       )}
       <Footer />
       <div

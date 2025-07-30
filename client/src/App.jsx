@@ -7,6 +7,7 @@ import Registration from './pages/Registration'
 import RegistrationSummary from './pages/RegistrationSummary'
 import ThankYou from './pages/ThankYou';
 import Ticket from './pages/Ticket';
+import Scroll from './components/Scroll';
 
 function App() {
  
@@ -14,6 +15,7 @@ function App() {
   return (
     <>
     <Router>
+      <Scroll/>
       <Routes>
         <Route path="/register" element={<Registration />} />
         <Route path="/summary" element={<RegistrationSummary />} />
