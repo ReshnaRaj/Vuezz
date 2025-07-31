@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CheckCircle } from "lucide-react";
 import { CircleCheck } from "lucide-react";
+import headerImage from "@/assets/header.png";
 import card1 from "@/assets/card1.png";
 import card2 from "@/assets/card2.jpg";
 import card3 from "@/assets/card3.jpg";
@@ -27,8 +28,14 @@ const tickets = [
     ],
     price: "USD 25.00 incl. 20% VAT",
     color: "bg-purple-800",
+ 
+
+    bg: "linear-gradient(90deg, #5B2A7C 0%, #431B5A 100%)", 
+     
+
     bgImage: card1,
   },
+  
   {
     title: "GITEX NIGERIA BUSINESS PASS",
     badge: null,
@@ -44,6 +51,7 @@ const tickets = [
     ],
     price: "USD 45.00 incl. 20% VAT",
     color: "bg-orange-600",
+    bg:"linear-gradient(90deg, #CD670A 0%, #CA3722 100%)",
     bgImage: card2,
   },
   {
@@ -61,6 +69,7 @@ const tickets = [
     ],
     price: "USD 120.00 incl. 20% VAT",
     color: "bg-green-700",
+    bg:"linear-gradient(90deg, #173903 0%, #081D01 100%)",
     bgImage: card3,
   },
   {
@@ -77,6 +86,7 @@ const tickets = [
     ],
     price: "FREE",
     color: "bg-red-800",
+    bg:"linear-gradient(90deg, #B5040A 0%, #631308 100%)",
     bgImage: card4,
   },
   {
@@ -93,6 +103,7 @@ const tickets = [
     ],
     price: "FREE (with Accreditation)",
     color: "bg-green-600",
+    bg:"linear-gradient(90deg, #53BE2C 0%, #27870C 100%)",
     bgImage: card5,
   },
   {
@@ -110,6 +121,7 @@ const tickets = [
     ],
     price: "USD 85.00 incl. 20% VAT",
     color: "bg-blue-700",
+    bg:"linear-gradient(90deg, #004D98 0%, #01277C 100%)",
     bgImage: card6,
   },
 ];
@@ -127,7 +139,7 @@ const TicketCard = ({
 }) => {
   return (
     <div
-      className="relative rounded-2xl overflow-hidden text-white shadow-xl flex flex-col"
+      className="relative rounded-2xl overflow-hidden text-white shadow-xl flex flex-col "
       style={{
         backgroundImage: `url(${ticket.bgImage})`,
         backgroundSize: "cover",
@@ -139,21 +151,48 @@ const TicketCard = ({
       <div className="absolute top-1/2 -right-3 transform -translate-y-1/2 w-6 h-6 bg-white rounded-full z-10"></div>
 
       {/* Top Header: Title, Badge, View Details */}
+      
       <div
-        className={`relative p-4 ${ticket.color} text-white text-sm font-bold`}
+        className="relative text-white text-sm font-bold p-4 h-16 rounded-t-2xl overflow-hidden"
+        // style={{
+        //   backgroundImage: `url(${headerImage})`,
+        //   backgroundSize: "cover",
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundPosition: "center",
+        // }}
       >
-        <div className="flex justify-between items-start">
+         <div
+    className="absolute inset-0 z-0"
+    style={{
+      background: `${ticket.bg}`,
+    }}
+  />
+   <div
+    className="absolute inset-0 z-0 opacity-30 mix-blend-overlay"
+    style={{
+      backgroundImage: `url(${headerImage})`,
+      backgroundSize: "contain",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+    }}
+  />
+ 
+
+ 
+      
+          
+        <div className="relative z-10 flex justify-between items-start">
           <div className={`${ticket.badge ? "ml-8" : ""} w-4/5 leading-snug`}>
             {ticket.title}
           </div>
           {ticket.badge && (
-            <div className="w-32 h-6 absolute -top-2 -left-6 rotate-[-48deg] z-20 bg-gradient-to-r from-green-500 to-green-700  text-[10px]  uppercase text-white rounded  font-extrabold px-2 py-0.5">
+            <div className="w-32 h-6 absolute -top-5 -left-10 rotate-[-48deg] z-20 bg-gradient-to-r from-green-500 to-green-700  text-[10px]  uppercase text-white rounded  font-extrabold px-2 py-0.5">
               {ticket.badge}
             </div>
           )}
         </div>
         <button
-          className={`text-sm font-bold cursor-pointer mt-1 ${
+          className={`relative z-10 text-sm font-bold cursor-pointer mt-1 ${
             ticket.badge ? "ml-8" : ""
           }`}
           style={{ color: "#E6FF00" }}
